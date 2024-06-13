@@ -2,7 +2,7 @@
 
 Web learning project made in NextJS, which is a modern and efficient technology based on React. With this project we seek to learn web technologies, both frontend and backend, and NextJS is ideal, since it integrates both sides.
 
-## Members
+## Original Creators
 
 - Richard Oropesa -RichardOro01
 - Javier García - Javy011021
