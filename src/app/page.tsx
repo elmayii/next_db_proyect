@@ -2,6 +2,7 @@
 import contract from "@/assets/icons/items/contract.svg";
 import brand from "@/assets/icons/items/brand.svg";
 import car from "@/assets/icons/items/car.svg";
+import moto from "@/assets/moto.svg"
 import couple from "@/assets/icons/items/couple-user.svg";
 import fuel from "@/assets/icons/items/fuel-gas-station.svg";
 import geography from "@/assets/icons/items/geography.svg";
@@ -27,52 +28,42 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
 
-  const {t} = useTranslation(["translation"])
+  //const {t} = useTranslation(["translation"])
 
   const {data}=useSession();
   
   return (
     <main className="flex flex-col items-center gap-6 ml-3  p-5">
-      <OptionSection name={t("Management",{ns:'translation'})}>
+      <OptionSection name={("Administración")}>
         <>
-          <OptionItem name={t("Contract",{ns:'translation'})} img={contract} link="./contracts" />
-          <OptionItem name={t("Service",{ns:'translation'})} img={service} link="./services" />
-          <OptionItem
-            name={t("Discrepancy",{ns:'translation'})}
-            img={discrepancy}
-            link="./discrepancies"
-          />
-          <OptionItem name={t("Roadmap",{ns:'translation'})} img={road} link="./roadmaps" />
-          <OptionItem name={t("Report",{ns:'translation'})} img={report} link="./reports" />
+          <OptionItem name={("Contratos")} img={contract} link="./contracts" />
+          <OptionItem name={("Clientes")} img={id} link="./drivers" />
+          <OptionItem name={("Motos")} img={moto} link="./moto" />
         </>
       </OptionSection>
-      <OptionSection name={t("Services",{ns:'translation'})}>
+      <OptionSection name={("Servicios")}>
         <>
-          <OptionItem name={t("Brands",{ns:'translation'})} img={brand} link="./brands" />
-          <OptionItem name={t("Cars",{ns:'translation'})} img={car} link="./cars" />
-          <OptionItem name={t("Drivers",{ns:'translation'})} img={id} link="./drivers" />
-          <OptionItem name={t("Couples",{ns:'translation'})} img={couple} link="./couples" />
+          <OptionItem name={("Marcas")} img={brand} link="./brands" />
+          <OptionItem name={("Motos(en tiempo real)")} img={moto} link="./motos(real)" />
+          <OptionItem name={("Mis Contratos")} img={contract} link="./contracts" />
         </>
       </OptionSection>
-      <OptionSection name={t("Reports",{ns:"translation"})}>
+      <OptionSection name={("Reportes")}>
         <>
-          <OptionItem name={t("Top 3 groups activity",{ns:"translation"})} img={suitcase} link="./top_3_groups" />
-          <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={bus} link="./top_5_drivers" />
-          <OptionItem name={t("Top 3 countries",{ns:"translation"})} img={world} link="./top_3_countries" />
-          <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
-          <OptionItem name={t("Drivers worked group",{ns:"translation"})} img={group} link="/drivers_worked_group_tour"/>
-          <OptionItem name={t("Contracts in period",{ns:"translation"})} img={coin} link="./contracts_in_period" />
-          <OptionItem name={t("Tourist group activities",{ns:"translation"})} img={coin} link="./tourist_groups_activities" />
+          <OptionItem name={("Clientes (incumplidores de contrato)")} img={id} link="./drivers" />
+          <OptionItem name={("Resumen de contratos por marcas y modelos")} img={suitcase} link="./top_3_groups" />
+          <OptionItem name={("Resumen de contratos por municipios")} img={bus} link="./top_5_drivers" />
+          <OptionItem name={("Listado de ingresos del año")} img={world} link="./top_3_countries" />
         </>
       </OptionSection>
-      {data?.role_code==1 && <OptionSection name={t("Others",{ns:'translation'})}>
+      {data?.role_code==1 && <OptionSection name={("Otros")}>
         <>
-          <OptionItem name={t("District",{ns:'translation'})} img={district} link="./districts" />
-          <OptionItem name={t("Fuel",{ns:'translation'})} img={fuel} link="./fuels" />
-          <OptionItem name={t("Country",{ns:'translation'})} img={geography} link="./countries" />
-          <OptionItem name={t("Month",{ns:'translation'})} img={bxs} link="./months" />
-          <OptionItem name={t("Tour group",{ns:'translation'})} img={tourist} link="./tourist_groups" />
-          <OptionItem name={t("Users",{ns:'translation'})} img={users} link="./users" />
+          <OptionItem name={("District")} img={district} link="./districts" />
+          <OptionItem name={("Fuel")} img={fuel} link="./fuels" />
+          <OptionItem name={("Country")} img={geography} link="./countries" />
+          <OptionItem name={("Month")} img={bxs} link="./months" />
+          <OptionItem name={("Tour group")} img={tourist} link="./tourist_groups" />
+          <OptionItem name={("Users")} img={users} link="./users" />
         </>
       </OptionSection>}
     </main>

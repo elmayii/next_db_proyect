@@ -14,7 +14,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         try {
-          const user = await prisma.users.findFirst({
+          const user = await prisma.usuario.findFirst({
             where: {
               username: credentials?.username,
               password: credentials?.password,
@@ -24,7 +24,7 @@ const authOptions: NextAuthOptions = {
 
           // If no error and we have user data, return it
           if (user) {
-            const resultUser = { ...user, id: user.user_code.toString() };
+            const resultUser = { ...user, id: user.id_usuario.toString() };
             return resultUser;
           }
         } catch (e) {
