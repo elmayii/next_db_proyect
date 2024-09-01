@@ -2,6 +2,7 @@
 
 import React from "react";
 import bus from "@/assets/bus.svg";
+import moto from "@/assets/moto.svg";
 import Image from "next/image";
 import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,11 +32,11 @@ const Header = () => {
           className="flex justify-between items-center py-2 px-4 shadow-2xl sticky top-0 bg-gradient-to-tr from-primary to-secondary z-10 text-white"
         >
           <div className="flex items-center gap-1">
-            <Image src={bus} alt="bus" width={50} className="invert-[1]" />
+            <Image src={moto} alt="moto" width={50} className="invert-[1]" />
             <div className="flex flex-col">
-              <h3 className="text-xl">Transbus</h3>
+              <h3 className="text-xl">E-Moto Rent</h3>
               <h5 className="text-base text-blue-100">
-                {t("An effective bus", { ns: "translation" })}
+                {t("An efficient transport", { ns: "translation" })}
               </h5>
             </div>
           </div>
