@@ -38,7 +38,7 @@ export default function Home() {
         <>
           <OptionItem name={("Contratos")} img={contract} link="./contracts" />
           <OptionItem name={("Clientes")} img={id} link="./drivers" />
-          <OptionItem name={("Motos")} img={moto} link="./moto" />
+          <OptionItem name={("Motos")} img={moto} link="./motos" />
         </>
       </OptionSection>
       <OptionSection name={("Servicios")}>

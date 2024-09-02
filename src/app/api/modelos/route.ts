@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Car } from "@/interfaces/Car";
 import prisma from "@/lib/prisma";
-import { Moto } from "@/interfaces/Moto";
+import { Moto, Motos } from "@/interfaces/Moto";
 
 export const COLUMN_NAME = "motos" as never;
 
@@ -21,21 +21,15 @@ export const COLUMN_NAME = "motos" as never;
  */
 
 export const GET = async () => {
-  const motos = await prisma.moto.findMany();
-  const marcas = await prisma.marca.findMany();
-  const modelos = await prisma.modelo.findMany();
-  const situaciones = await prisma.situacion.findMany();
-  const result: Moto[] = motos.map((moto) => ({
-    id_moto: moto.id_moto,
-    color: moto.color ,
-    km: moto.km,
-    marca: marcas.find((ma) => ma.id_marca === moto.id_marca),
-    modelo: modelos.find((mo) => mo.id_modelo === moto.id_modelo),
-    situacion: situaciones.find((s) => s.id_situa === moto.id_situa),
-    matricula: moto.matricula
-  }));
+  try {
+    const result : any[] = await prisma.$queryRaw`SELECT * FROM obtener_todos_los_modelos()`;
   return NextResponse.json(result ?? []);
+  } catch (error) {
+    console.log(error)
+  }
 };
+
+//const data = await prisma.$queryRaw`SELECT * FROM obtener_resumen_motos()`;
 
 /**
  * @swagger
@@ -76,3 +70,12 @@ export const POST = async (request: Request, response: Response) => {
     return NextResponse.json("Error creando marca", { status: 400 }); 
   }
 };
+
+
+// BEGIN
+// 	RETURN QUERY SELECT m.matricula, m.color, m.km, ma.nom_marca, mod.nom_modelo, ma.id_marca, mod.id_modelo
+// 	FROM public."Moto" as m JOIN public."Modelo" as mod on m.id_modelo = mod.id_modelo
+// 	JOIN public."Marca" as ma ON mod.id_marca = ma.id_marca;
+// END;
+
+// TABLE(matricula character varying, color character varying, km double precision, nom_marca character varying, nom_modelo character varying)

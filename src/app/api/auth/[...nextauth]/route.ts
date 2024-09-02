@@ -16,7 +16,7 @@ const authOptions: NextAuthOptions = {
         try {
           const user = await prisma.usuario.findFirst({
             where: {
-              username: credentials?.username,
+              nom_usuario: credentials?.username,
               password: credentials?.password,
             },
           });
