@@ -13,4 +13,7 @@ export type CRUD_ModalsType =
   | "tour_groups"
   | "reports"
   | "users"
-  | "months";
+  | "months"
+  | "motos"
+  | "modelos"
+  | "marcas"

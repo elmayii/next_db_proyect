@@ -75,14 +75,14 @@ model Situacion {
 }
 
 model Usuario {
-  id_usuario Int        @id(map: "Cliente_pkey") @default(autoincrement())
-  username   String     @db.VarChar
-  edad       Int
-  sexo       String     @db.VarChar
-  num_tel    String     @db.VarChar
-  id_mun     Int
-  id_rol     Int
-  password   String     @db.VarChar
-  Contrato   Contrato[]
-  Municipio  Municipio  @relation(fields: [id_mun], references: [id_mun], onDelete: NoAction, onUpdate: NoAction, map: "id_mun_fk")
+  id_usuario  Int        @id(map: "Cliente_pkey") @default(autoincrement())
+  nom_usuario String     @db.VarChar
+  edad        Int
+  sexo        String     @db.VarChar
+  num_tel     String     @db.VarChar
+  id_mun      Int
+  id_rol      Int
+  password    String     @db.VarChar
+  Contrato    Contrato[]
+  Municipio   Municipio  @relation(fields: [id_mun], references: [id_mun], onDelete: NoAction, onUpdate: NoAction, map: "id_mun_fk")
 }
