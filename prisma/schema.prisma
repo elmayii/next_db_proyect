@@ -49,7 +49,7 @@ model Moto {
   km        Float
   id_marca  Int
   id_modelo Int
-  id_situa  Int
+  id_situa  Int        @default(3)
   matricula String     @db.VarChar
   Contrato  Contrato[]
   Marca     Marca      @relation(fields: [id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "id_marca_fk")

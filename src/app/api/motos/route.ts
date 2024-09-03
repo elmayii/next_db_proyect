@@ -73,7 +73,7 @@ export const POST = async (request: Request, response: Response) => {
   const data: CreateMoto = await request.json();
   const {color,km,matricula,id_marca,id_modelo,id_situa} = data
   try {
-    await prisma.$queryRaw`SELECT * FROM crear_moto(${color},${km},${id_marca},${id_modelo},${id_situa},${matricula})`
+    await prisma.$executeRaw`SELECT crear_moto(${color},${km},${id_marca},${id_modelo},${id_situa},${matricula})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     console.log(error)
