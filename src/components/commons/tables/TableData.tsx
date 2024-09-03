@@ -58,7 +58,8 @@ const TableData: React.FC<TableDataProps> = ({
         router.refresh();
         api.success({ message: t("Element Successfully Deleted",{ns:"translation"}) });
       } catch (error: any) {
-        api.error({ message: error.detail.message });
+        console.log(error)
+        api.error({ message: error.detail?.message });
       } finally {
         removeFromDeleting(value.key);
       }

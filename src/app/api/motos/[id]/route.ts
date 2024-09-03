@@ -109,10 +109,11 @@ export const DELETE = async (
 ) => {
   try {
     const { id } = params;
-    const id_moto = parseInt(id);
-    await prisma.moto.delete({ where: { id_moto } });
+    const p_id_moto = parseInt(id);
+    await prisma.$executeRaw`SELECT eliminar_moto(${p_id_moto})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
+    console.log(error)
     if (
       (error as PrismaClientUnknownRequestError).name ===
       "PrismaClientUnknownRequestError"
