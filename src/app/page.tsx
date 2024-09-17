@@ -43,7 +43,7 @@ export default function Home() {
       </OptionSection>
       <OptionSection name={("Servicios")}>
         <>
-          <OptionItem name={("Marcas")} img={brand} link="./brands" />
+          <OptionItem name={("Marcas")} img={brand} link="./marcas" />
           <OptionItem name={("Motos(en tiempo real)")} img={moto} link="./motos(real)" />
           <OptionItem name={("Mis Contratos")} img={contract} link="./contracts" />
         </>

@@ -15,6 +15,7 @@ import ReportModal from "./management/ReportModal";
 import UserModal from "./others/UserModal";
 import MonthsModal from "./others/MonthsModal";
 import MotoModal from "./services/MotoModal";
+import MarcasModal from "./others/MarcasModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   brands: <BrandModal />,
@@ -32,5 +33,6 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   months: <MonthsModal />,
   reports: <ReportModal />,
   users: <UserModal />,
-  motos: <MotoModal/>
+  motos: <MotoModal/>,
+  marcas: <MarcasModal/>
 };
