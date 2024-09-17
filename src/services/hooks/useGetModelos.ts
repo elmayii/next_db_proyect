@@ -5,7 +5,7 @@ import { Marca } from "@/interfaces/Marca";
 import modeloService from "../tables/modelo";
 import { Modelo } from "@prisma/client";
 
-function useGetModelos() {
+function useGetModelos(id_marca:string) {
 
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState<Modelo[]>([]);
@@ -13,7 +13,8 @@ function useGetModelos() {
 
   const getModelos = useCallback(async () => {
     setLoading(true);
-    await modeloService.get()
+    if(id_marca){
+      await modeloService.getBy(id_marca)
       .then((res) => {
         setList(res);
       })
@@ -23,8 +24,22 @@ function useGetModelos() {
       .finally(() => {
         setLoading(false);
       });
+    }
+    else{
+      await modeloService.get()
+      .then((res) => {
+        setList(res);
+      })
+      .catch((e) => {
+        setError(e)
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    }
+    
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id_marca]);
 
   useEffect(() => {
     getModelos();

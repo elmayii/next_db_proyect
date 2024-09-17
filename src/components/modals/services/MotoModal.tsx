@@ -16,7 +16,7 @@ import { carCreateAdapter, carFormAdapter, carTypesAdapter } from "@/interfaces/
 import useGetBrands from "@/services/hooks/useGetBrands";
 import { brandOptionsAdapter } from "@/interfaces/adapters/BrandAdapter";
 import { useTranslation } from "react-i18next";
-import { EditMoto } from "@/interfaces/Moto";
+import { EditMoto, Motos } from "@/interfaces/Moto";
 import { motoCreateAdapter, motoFormAdapter, motoTypesAdapter } from "@/interfaces/adapters/MotoAdapter";
 import motoService from "@/services/tables/moto";
 import useGetMarcas from "@/services/hooks/useGetMarcas";
@@ -29,7 +29,7 @@ const MotoModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const {t} = useTranslation(['Cars'])
-  const editing = useSelector((state: RootState) => state.modal.editing as EditCar|undefined);
+  const editing = useSelector((state: RootState) => state.modal.editing as EditMoto|undefined);
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditMoto>>(
     {
@@ -43,7 +43,7 @@ const MotoModal: React.FC = () => {
   );
 
   const marcasData = useGetMarcas()
-  const modelosData = useGetModelos()
+  const modelosData = useGetModelos(data.id_marca || "")
   
   const handleOk = async () => {
     try {
