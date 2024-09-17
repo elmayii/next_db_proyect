@@ -12,6 +12,7 @@ import { Marca } from "@/interfaces/Marca";
 import { marcaAdapter, marcaOptionsAdapter } from "@/interfaces/adapters/MarcaAdapter";
 import { Municipio } from "@/interfaces/Municipio";
 import { munAdapter } from "@/interfaces/adapters/MunicipioAdapter";
+import municipioService from "@/services/tables/municipio";
 
 const columns: ColumnsType<Municipio> = [
   {
@@ -21,10 +22,10 @@ const columns: ColumnsType<Municipio> = [
   },
 ];
 
-const MotoPage = async () => {
+const MunPage = async () => {
   let municipios: Municipio[] = [];
   try {
-    municipios = await marcaService.get();
+    municipios = await municipioService.get();
     console.log(municipios)
   } catch (error) {
     console.log(error);
@@ -32,8 +33,8 @@ const MotoPage = async () => {
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData
-        title="Marcas"
-        modal="marcas"
+        title="Municipios"
+        modal="municipio"
         dataToShow={munAdapter(municipios)}
         Data={municipios}
         {...{ columns }}
@@ -42,4 +43,4 @@ const MotoPage = async () => {
   );
 };
 
-export default MotoPage;
+export default MunPage;
