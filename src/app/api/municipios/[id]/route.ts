@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
 import {  Modelo } from "@/interfaces/Modelo";
+import { Municipio } from "@/interfaces/Municipio";
 
 /**
  * @swagger
@@ -30,26 +31,14 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   const { id } = params;
-  const p_id_modelo = parseInt(id);
-  const moto = await prisma.$executeRaw`SELECT obtener_modelo(${p_id_modelo})`;
+  const p_id_municipio = parseInt(id);
+  const moto = await prisma.$executeRaw`SELECT obtener_municipio(${p_id_municipio})`;
   if (moto) {
     return NextResponse.json(moto);
   }
   return NextResponse.error();
 };
 
-export const GETBY = async (
-  request: Request,
-  { params }: { params: { id: string } }
-) => {
-  const { id } = params;
-  const p_id_marca = parseInt(id);
-  const moto = await prisma.$executeRaw`SELECT obtener_modelos_por_marca(${p_id_marca})`
-  if (moto) {
-    return NextResponse.json(moto);
-  }
-  return NextResponse.error();
-};
 
 /**
  * @swagger
@@ -89,10 +78,10 @@ export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const data:Modelo = await request.json();
+  const data:Municipio = await request.json();
   const { id } = params;
-  const p_id_modelo = parseInt(id);
-  await prisma.$executeRaw`SELECT actualizar_modelo(${p_id_modelo}, ${data.nom_modelo}, ${data.marca})`;
+  const p_id_municipio = parseInt(id);
+  await prisma.$executeRaw`SELECT actualizar_modelo(${p_id_municipio}, ${data.nom_mun})`;
   return NextResponse.json({ ok: true });
 };
 
@@ -123,8 +112,8 @@ export const DELETE = async (
 ) => {
   try {
     const { id } = params;
-    const p_id_modelo = parseInt(id);
-    await prisma.$executeRaw`SELECT eliminar_modelo(${p_id_modelo})`;
+    const p_id_municipio = parseInt(id);
+    await prisma.$executeRaw`SELECT eliminar_modelo(${p_id_municipio})`;
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (

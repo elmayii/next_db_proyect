@@ -25,31 +25,34 @@ import { modeloOptionsAdapter } from "@/interfaces/adapters/ModeloAdapter";
 import { marcaCreateAdapter, marcaFormAdapter, marcaOptionsAdapter, marcaTypesAdapter } from "@/interfaces/adapters/MarcaAdapter";
 import { Marca } from "@/interfaces/Marca";
 import marcaService from "@/services/tables/marca";
+import { Municipio } from "@/interfaces/Municipio";
+import { munCreateAdapter, munFormAdapter, munTypesAdapter } from "@/interfaces/adapters/MunicipioAdapter";
+import municipioService from "@/services/tables/municipio";
 
 const MotoModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const {t} = useTranslation(['Cars'])
-  const editing = useSelector((state: RootState) => state.modal.editing as Marca|undefined);
+  const editing = useSelector((state: RootState) => state.modal.editing as Municipio|undefined);
   const [api, contextHolder] = notification.useNotification();
-  const [data, setData] = useState<FormDataType<Marca>>(
+  const [data, setData] = useState<FormDataType<Municipio>>(
     {
-      nom_marca: "",
-      id_marca:''
+      nom_mun: "",
+      id_mun:''
     }
   );
   
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      const adaptedTypesData = marcaTypesAdapter(data);
+      const adaptedTypesData = munTypesAdapter(data);
       if (editing) {
-        await marcaService.update(data.id_marca?.toString(), adaptedTypesData);
+        await municipioService.update(data.id_mun?.toString(), adaptedTypesData);
       } else {
-        await marcaService.add(marcaCreateAdapter(adaptedTypesData));
+        await municipioService.add(munCreateAdapter(adaptedTypesData));
       }
-      api.success({ message: "Moto creada" }); //TODO cuando se cierra el modal no deja ver esto
+      api.success({ message: "Municipio creada" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
       router.refresh();
     } catch (error: any) {
@@ -59,7 +62,7 @@ const MotoModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      setData(marcaFormAdapter(editing));
+      setData(munFormAdapter(editing));
     }
   }, [editing]);
 
@@ -84,7 +87,7 @@ const MotoModal: React.FC = () => {
               label="Marca"
               id="nom_marca"
               maxLength={20}
-              currentValue={data.nom_marca}
+              currentValue={data.nom_mun}
               onChange={(e) =>
                 setData((data) => {
                   return { ...data, nom_marca: e.target.value };

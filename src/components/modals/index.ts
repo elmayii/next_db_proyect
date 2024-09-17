@@ -16,3 +16,6 @@ export type CRUD_ModalsType =
   | "months"
   | "motos"
   | "marcas"
+  | "modelos"
+  | "situacion"
+  

@@ -3,8 +3,9 @@ import { Car } from "@/interfaces/Car";
 import prisma from "@/lib/prisma";
 import { Moto, Motos } from "@/interfaces/Moto";
 import { CreateModelo } from "@/interfaces/Modelo";
+import { CreateSituacion, Situacion } from "@/interfaces/Situacion";
 
-export const COLUMN_NAME = "modelos" as never;
+export const COLUMN_NAME = "situacion" as never;
 
 /**
  * @swagger
@@ -23,14 +24,13 @@ export const COLUMN_NAME = "modelos" as never;
 
 export const GET = async () => {
   try {
-    const result : any[] = await prisma.$queryRaw`SELECT * FROM obtener_todos_los_modelos()`;
+    const result : Situacion[] = await prisma.$queryRaw`SELECT * FROM obtener_todas_las_situaciones()`;
   return NextResponse.json(result ?? []);
   } catch (error) {
     console.log(error)
   }
 };
 
-//const data = await prisma.$queryRaw`SELECT * FROM obtener_resumen_motos()`;
 
 /**
  * @swagger
@@ -60,17 +60,17 @@ export const GET = async () => {
 
 export const POST = async (request: Request, response: Response) => {
   
-  const data: CreateModelo = await request.json();
-  const { nom_modelo } = data
+  const data: CreateSituacion = await request.json();
+  const { nom_situa } = data
   try {
-    await prisma.$executeRaw`SELECT crear_modelo(${nom_modelo})`
+    await prisma.$executeRaw`SELECT crear_situacion(${nom_situa})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     console.log(error)
     if(error.code === "P2002"){
-      return NextResponse.json("Nombre de marca ya usado", { status: 400 });
+      return NextResponse.json("Situacion ya existe", { status: 400 });
     }
-    return NextResponse.json("Error creando marca", { status: 400 }); 
+    return NextResponse.json("Error creando situacion", { status: 400 }); 
   }
 };
 
