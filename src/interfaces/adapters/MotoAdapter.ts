@@ -8,7 +8,9 @@ export const motoAdapter = (motos: Moto[]): TableDataType<Moto>[] => {
     color: moto.color || "",
     km: moto.km?.toString() || "",
     nom_marca: moto.marca?.nom_marca || "",
+    id_marca:moto.marca?.id_marca.toString() || "",
     nom_modelo: moto.modelo?.nom_modelo || "",
+    id_modelo: moto.modelo?.id_modelo.toString() || "",
     key: moto.id_moto || "",
     matricula:moto.matricula || ""
   }));
@@ -17,8 +19,8 @@ export const motoAdapter = (motos: Moto[]): TableDataType<Moto>[] => {
 export const motoFormAdapter = (moto: Moto): FormDataType<EditMoto> => ({
     color: moto.color || "",
     km: moto.km?.toString() || "",
-    id_marca: moto.marca?.nom_marca?.toString() || "",
-    id_modelo: moto.modelo?.nom_modelo.toString() || "",
+    id_marca: moto.marca?.id_marca?.toString() || "",
+    id_modelo: moto.modelo?.id_modelo.toString() || "",
     matricula:moto.matricula || "",
     id_moto:moto.id_moto.toString()
 });

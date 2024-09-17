@@ -40,7 +40,7 @@ const MotoPage = async () => {
   let motos: Motos[] = [];
   try {
     motos = await motoService.get();
-    //console.log(motos)
+    console.log(motos)
   } catch (error) {
     console.log(error);
   }

@@ -37,6 +37,19 @@ export const GET = async (
   return NextResponse.error();
 };
 
+export const GETBY = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const { id } = params;
+  const p_id_marca = parseInt(id);
+  const moto = await prisma.$executeRaw`SELECT obtener_modelos_por_marca(${p_id_marca})`
+  if (moto) {
+    return NextResponse.json(moto);
+  }
+  return NextResponse.error();
+};
+
 /**
  * @swagger
  *  /api/cars/{id}:

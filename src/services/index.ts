@@ -9,6 +9,17 @@ export const GET = async (url: string, cache: RequestCache = "no-store") => {
   return Promise.resolve(response.json());
 };
 
+export const GETBY = async (url: string, cache: RequestCache = "no-store") => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    ...{ cache },
+  });
+  if (response.status > 300) {
+    const json = await response.json();
+    return Promise.reject({ detail: json });
+  }
+  return Promise.resolve(response.json());
+};
+
 export const POST = async (url: string, data: any) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
     method: "POST",

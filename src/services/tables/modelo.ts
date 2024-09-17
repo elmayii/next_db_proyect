@@ -4,6 +4,7 @@ import { Couple } from "@/interfaces/Couple";
 
 const modeloService: Service = {
   get: async (key?: string) => GET(`modelos${key ? `/${key}` : ""}`),
+  getBy: async (key?: string) => GET(`modelos${key ? `/${key}` : ""}`),
   add: async (data: Couple) => POST("modelos", data),
   delete: async (key: string) => DELETE(`modelos/${key}`),
   update: async (key: string, body: Couple) => POST(`modelos/${key}`, body),
