@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
+import { CreateMarca, Marca } from "@/interfaces/Marca";
 
 /**
  * @swagger
@@ -75,10 +76,11 @@ export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const data = await request.json();
+  const data :Marca= await request.json();
+  const p_nom_marca = data.nom_marca
   const { id } = params;
-  const id_moto = parseInt(id);
-  await prisma.moto.update({ where: { id_moto }, data });
+  const p_id_marca = parseInt(id);
+  await prisma.$executeRaw`SELECT actualizar_marca(${p_id_marca}, ${p_nom_marca })`;
   return NextResponse.json({ ok: true });
 };
 
@@ -109,8 +111,8 @@ export const DELETE = async (
 ) => {
   try {
     const { id } = params;
-    const id_moto = parseInt(id);
-    await prisma.moto.delete({ where: { id_moto } });
+    const p_id_marca= parseInt(id);
+    await prisma.$executeRaw`SELECT eliminar_marca(${p_id_marca})`;
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (

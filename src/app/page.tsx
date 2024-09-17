@@ -39,11 +39,15 @@ export default function Home() {
           <OptionItem name={("Contratos")} img={contract} link="./contracts" />
           <OptionItem name={("Clientes")} img={id} link="./drivers" />
           <OptionItem name={("Motos")} img={moto} link="./motos" />
+          <OptionItem name={("Municipios")} img={brand} link="./municipios" />
+          <OptionItem name={("Marcas")} img={brand} link="./marcas" />
+          <OptionItem name={("Situacion")} img={car} link="./situacion" />
+          <OptionItem name={("Modelos")} img={car} link="./modelos" />
         </>
       </OptionSection>
       <OptionSection name={("Servicios")}>
         <>
-          <OptionItem name={("Marcas")} img={brand} link="./marcas" />
+          
           <OptionItem name={("Motos(en tiempo real)")} img={moto} link="./motos(real)" />
           <OptionItem name={("Mis Contratos")} img={contract} link="./contracts" />
         </>
