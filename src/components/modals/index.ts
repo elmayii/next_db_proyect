@@ -7,4 +7,6 @@ export type CRUD_ModalsType =
   | "modelos"
   | "situacion"
   | "clientes"
-  
+  | "municipio"
+  | "motos_situacion"
+
