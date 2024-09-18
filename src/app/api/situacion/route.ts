@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
-import { Car } from "@/interfaces/Car";
 import prisma from "@/lib/prisma";
-import { Moto, Motos } from "@/interfaces/Moto";
-import { CreateModelo } from "@/interfaces/Modelo";
 import { CreateSituacion, Situacion } from "@/interfaces/Situacion";
 
 export const COLUMN_NAME = "situacion" as never;

@@ -1,10 +1,9 @@
 import { Option } from "@/components/commons/forms/InputSelect";
-import { Modelo } from "../Modelo";
 import {  CreateMunicipio, Municipio } from "../Municipio";
 
 export const munAdapter = (mun:Municipio[]): TableDataType<Municipio>[] =>{
   return mun.map((mun) => ({
-    nom_mun: mun.nom_mun as string,
+    nom_mun: mun.nom_mun,
     key: mun.id_mun?.toString() 
   }));
 }
@@ -12,7 +11,7 @@ export const munAdapter = (mun:Municipio[]): TableDataType<Municipio>[] =>{
 
 export const munOptionsAdapter = (mun: Municipio[]): Option[] =>
   mun.map((mun) => ({
-    label: mun.nom_mun as string,
+    label: mun.nom_mun ,
     value: mun.id_mun?.toString(),
 }));
 
