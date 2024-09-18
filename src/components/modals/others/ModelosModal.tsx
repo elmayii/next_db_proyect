@@ -21,33 +21,35 @@ import { motoCreateAdapter, motoFormAdapter, motoTypesAdapter } from "@/interfac
 import motoService from "@/services/tables/moto";
 import useGetMarcas from "@/services/hooks/useGetMarcas";
 import useGetModelos from "@/services/hooks/useGetModelos";
-import { modeloOptionsAdapter } from "@/interfaces/adapters/ModeloAdapter";
+import { modeloCreateAdapter, modeloFormAdapter, modeloOptionsAdapter, modeloTypesAdapter } from "@/interfaces/adapters/ModeloAdapter";
 import { marcaCreateAdapter, marcaFormAdapter, marcaOptionsAdapter, marcaTypesAdapter } from "@/interfaces/adapters/MarcaAdapter";
 import { Marca } from "@/interfaces/Marca";
 import marcaService from "@/services/tables/marca";
+import { Modelo } from "@/interfaces/Modelo";
+import modeloService from "@/services/tables/modelo";
 
 const MotoModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const {t} = useTranslation(['Cars'])
-  const editing = useSelector((state: RootState) => state.modal.editing as Marca|undefined);
+  const editing = useSelector((state: RootState) => state.modal.editing as Modelo|undefined);
   const [api, contextHolder] = notification.useNotification();
-  const [data, setData] = useState<FormDataType<Marca>>(
+  const [data, setData] = useState<FormDataType<Modelo>>(
     {
-      nom_marca: "",
-      id_marca:''
+      nom_modelo: "",
+      id_modelo:''
     }
   );
   
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      const adaptedTypesData = marcaTypesAdapter(data);
+      const adaptedTypesData = modeloTypesAdapter(data);
       if (editing) {
-        await marcaService.update(data.id_marca?.toString(), adaptedTypesData);
+        await modeloService.update(data.id_modelo?.toString(), adaptedTypesData);
       } else {
-        await marcaService.add(marcaCreateAdapter(adaptedTypesData));
+        await modeloService.add(modeloCreateAdapter(adaptedTypesData));
       }
       api.success({ message: "Moto creada" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
@@ -59,7 +61,7 @@ const MotoModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      setData(marcaFormAdapter(editing));
+      setData(modeloFormAdapter(editing));
     }
   }, [editing]);
 
@@ -84,7 +86,7 @@ const MotoModal: React.FC = () => {
               label="Marca"
               id="nom_marca"
               maxLength={20}
-              currentValue={data.nom_marca}
+              currentValue={data.nom_modelo}
               onChange={(e) =>
                 setData((data) => {
                   return { ...data, nom_marca: e.target.value };

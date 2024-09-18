@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { Car } from "@/interfaces/Car";
 import prisma from "@/lib/prisma";
-import { Moto, Motos } from "@/interfaces/Moto";
+import { CreateMarca } from "@/interfaces/Marca";
 
-export const COLUMN_NAME = "motos" as never;
+export const COLUMN_NAME = "marcas" as never;
 
 /**
  * @swagger
@@ -58,14 +57,16 @@ export const GET = async () => {
  */
 
 export const POST = async (request: Request, response: Response) => {
-  const data = await request.json();
+  
+  const data: CreateMarca = await request.json();
+  const {nom_marca} = data
   try {
-    await prisma.moto.create({ data });
+    await prisma.$executeRaw`SELECT crear_marca(${nom_marca})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
-    console.log(error.code)
+    console.log(error)
     if(error.code === "P2002"){
-      return NextResponse.json("Numero de flota o chapa ya usado", { status: 400 });
+      return NextResponse.json("Nombre de marca ya usado", { status: 400 });
     }
     return NextResponse.json("Error creando marca", { status: 400 }); 
   }

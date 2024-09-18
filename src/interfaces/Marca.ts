@@ -3,8 +3,7 @@ export interface Marca {
   nom_marca: string | null;
 }
 
-export interface EditMarca extends Omit<Marca, "id_marca"> {
-}
+
 
 export interface CreateMarca extends Omit<Marca, "id_marca"> {
 }

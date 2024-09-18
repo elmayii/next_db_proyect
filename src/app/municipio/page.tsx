@@ -10,20 +10,22 @@ import { Moto, Motos } from "@/interfaces/Moto";
 import marcaService from "@/services/tables/marca";
 import { Marca } from "@/interfaces/Marca";
 import { marcaAdapter, marcaOptionsAdapter } from "@/interfaces/adapters/MarcaAdapter";
+import { Municipio } from "@/interfaces/Municipio";
+import { munAdapter } from "@/interfaces/adapters/MunicipioAdapter";
 
-const columns: ColumnsType<Marca> = [
+const columns: ColumnsType<Municipio> = [
   {
-    title: "Marca",
-    dataIndex: "nom_marca",
-    key: "nom_marca",
+    title: "Municipios",
+    dataIndex: "nom_mun",
+    key: "nom_mun",
   },
 ];
 
 const MotoPage = async () => {
-  let marcas: Marca[] = [];
+  let municipios: Municipio[] = [];
   try {
-    marcas = await marcaService.get();
-    console.log(marcas)
+    municipios = await marcaService.get();
+    console.log(municipios)
   } catch (error) {
     console.log(error);
   }
@@ -32,8 +34,8 @@ const MotoPage = async () => {
       <TableData
         title="Marcas"
         modal="marcas"
-        dataToShow={marcaAdapter(marcas)}
-        Data={marcas}
+        dataToShow={munAdapter(municipios)}
+        Data={municipios}
         {...{ columns }}
       />
     </main>

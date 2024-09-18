@@ -10,30 +10,32 @@ import { Moto, Motos } from "@/interfaces/Moto";
 import marcaService from "@/services/tables/marca";
 import { Marca } from "@/interfaces/Marca";
 import { marcaAdapter, marcaOptionsAdapter } from "@/interfaces/adapters/MarcaAdapter";
+import { Modelo } from "@/interfaces/Modelo";
+import { modeloAdapter } from "@/interfaces/adapters/ModeloAdapter";
 
-const columns: ColumnsType<Marca> = [
+const columns: ColumnsType<Modelo> = [
   {
-    title: "Marca",
-    dataIndex: "nom_marca",
-    key: "nom_marca",
+    title: "Modelo",
+    dataIndex: "nom_modelo",
+    key: "nom_modelo",
   },
 ];
 
 const MotoPage = async () => {
-  let marcas: Marca[] = [];
+  let modelos:Modelo[] = [];
   try {
-    marcas = await marcaService.get();
-    console.log(marcas)
+    modelos = await marcaService.get();
+    console.log(modelos)
   } catch (error) {
     console.log(error);
   }
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData
-        title="Marcas"
-        modal="marcas"
-        dataToShow={marcaAdapter(marcas)}
-        Data={marcas}
+        title="Modelos"
+        modal="modelos"
+        dataToShow={modeloAdapter(modelos)}
+        Data={modelos}
         {...{ columns }}
       />
     </main>
