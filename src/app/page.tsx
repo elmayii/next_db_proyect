@@ -36,8 +36,8 @@ export default function Home() {
     <main className="flex flex-col items-center gap-6 ml-3  p-5">
       <OptionSection name={("Administración")}>
         <>
-          <OptionItem name={("Contratos")} img={contract} link="./contracts" />
-          <OptionItem name={("Clientes")} img={id} link="./drivers" />
+          <OptionItem name={("Contratos")} img={contract} link="./contratos" />
+          <OptionItem name={("Clientes")} img={id} link="./clientes" />
           <OptionItem name={("Motos")} img={moto} link="./motos" />
           <OptionItem name={("Municipios")} img={brand} link="./municipios" />
           <OptionItem name={("Marcas")} img={brand} link="./marcas" />

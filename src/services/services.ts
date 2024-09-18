@@ -18,26 +18,18 @@ import userService from "./tables/users";
 import motoService from "./tables/moto";
 import marcaService from "./tables/marca";
 import modeloService from "./tables/modelo";
+import clientService from "./tables/clients";
+import situaService from "./tables/situacion";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
-  brands: brandService,
-  contracts: contractService,
-  services: servicesAppService,
-  cars: carService,
-  drivers: driverService,
-  couples: coupleService,
-  discrepancies: discrepancyService,
-  roadmaps: roadmapService,
-  districts: districtService,
-  fuels: fuelService,
-  countries: countryService,
-  tour_groups: tourService,
-  reports: reportService,
+  contratos: contractService,
+  clientes: clientService,
   users: userService,
   months: monthService,
-  marcas:marcaService,
-  modelos:modeloService,
-  motos:motoService
+  marcas: marcaService,
+  modelos: modeloService,
+  motos: motoService,
+  situacion: situaService
 };
 
 export default services;

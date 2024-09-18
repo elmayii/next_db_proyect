@@ -7,39 +7,54 @@ import React from "react";
 
 const columns: ColumnsType<Contract> = [
   {
-    title: "Applicant",
-    dataIndex: "applicant_name",
-    key: "applicant_name",
+    title: "Nombre Cliente",
+    dataIndex: "nom_cliente",
+    key: "nom_cliente",
   },
   {
-    title: "Start date",
-    dataIndex: "start_date",
-    key: "start_date",
+    title: "Fecha Inicio",
+    dataIndex: "fecha_ini",
+    key: "fecha_ini",
   },
   {
-    title: "End date",
-    dataIndex: "end_date",
-    key: "end_date",
+    title: "Fecha Fin",
+    dataIndex: "fecha_fin",
+    key: "fecha_fin",
   },
   {
-    title: "Kms",
-    dataIndex: "contract_kms",
-    key: "contract_kms",
+    title: "Matricula",
+    dataIndex: "matricula",
+    key: "matricula",
   },
   {
-    title: "Amount",
-    dataIndex: "contract_amount",
-    key: "contract_amount",
+    title: "Modelo",
+    dataIndex: "modelo",
+    key: "modelo",
   },
   {
-    title: "Country",
-    dataIndex: "country_name",
-    key: "country_name",
+    title: "Marca",
+    dataIndex: "marca",
+    key: "marca",
   },
   {
-    title: "Plate",
-    dataIndex: "plate",
-    key: "plate",
+    title: "Forma de Pago",
+    dataIndex: "nom_formaPago",
+    key: "nom_formaPago",
+  },
+  {
+    title: "Prórroga",
+    dataIndex: "dias_prorro",
+    key: "dias_prorro",
+  },
+  {
+    title: "Seguro Adicional",
+    dataIndex: "seguro",
+    key: "seguro",
+  },
+  {
+    title: "Importe Total",
+    dataIndex: "precio",
+    key: "precio",
   },
 ];
 
@@ -53,8 +68,8 @@ const ContractPage = async () => {
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData
-        title="Contracts"
-        modal="contracts"
+        title="Contratos"
+        modal="contratos"
         Data={contracts}
         dataToShow={contractTableAdapter(contracts)}
         {...{ columns }}
