@@ -1,6 +1,4 @@
 import { Option } from "@/components/commons/forms/InputSelect";
-import { Modelo } from "../Modelo";
-import {  CreateMarca, Marca } from "../Marca";
 import { CreateSituacion, Situacion } from "../Situacion";
 
 export const situaAdapter = (situaciones:Situacion[]): TableDataType<Situacion>[] =>{
@@ -26,7 +24,7 @@ export const situaCreateAdapter = (situacion: Situacion): CreateSituacion => ({
   nom_situa:situacion.nom_situa,});
 
 export const situaFormAdapter = (situacion:Situacion): FormDataType<Situacion> => ({
-  nom_situa: situacion.nom_situa || "",
+  nom_situa: situacion.nom_situa ?? "",
   id_situa: situacion.id_situa?.toString() || "",
 });
 

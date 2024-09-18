@@ -8,4 +8,5 @@ export type CRUD_ModalsType =
   | "situacion"
   | "clientes"
   | "municipio"
+  | "motos_situacion"
 
