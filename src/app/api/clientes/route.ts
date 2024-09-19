@@ -1,3 +1,4 @@
+import { CreateClient } from "@/interfaces/Clients";
 import { Contract, CreateContract } from "@/interfaces/Contract";
 import prisma from "@/lib/prisma";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
@@ -63,10 +64,10 @@ export const GET = async () => {
 
 export const POST = async (request: Request, response: Response) => {
   
-  const data: CreateContract = await request.json();
-  const { fecha_ini } = data
+  const data: CreateClient = await request.json();
+  const { nom_cliente,apellido_cliente,id_mun } = data
   try {
-    await prisma.$executeRaw`SELECT crear_modelo(${nom_modelo})`
+    await prisma.$executeRaw`SELECT crear_cliente(${nom_cliente},${apellido_cliente},${id_mun})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     console.log(error)

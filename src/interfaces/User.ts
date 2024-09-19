@@ -1,16 +1,20 @@
-import { Role } from "./Role";
 
 export interface User {
-  user_code: number;
-  username: string;
-  password: string | null;
-  name: string | null;
-  email: string | null;
-  role?: Role;
+  id_usuario: number;
+  nom_usuario: string;
+  edad: number;
+  sexo: string;
+  num_tel: string;
+  id_mun: number;
+  nom_mun?: string;
+  id_rol: number;
+  rol?: string;
+  password: string;
 }
 
-export interface EditUser extends Omit<User, "role"> {
-  id_rol?: number;
+export interface EditUser extends Omit<User, "rol"|'nom_mun'> {
+  id_rol: number;
+  id_mun: number;
 }
 
-export interface CreateUser extends Omit<EditUser, "user_code"> {}
+export interface CreateUser extends Omit<EditUser, "id_usuario"> {}
