@@ -7,11 +7,11 @@ import { carAdapter } from "@/interfaces/adapters/CarAdapter";
 import motoService from "@/services/tables/moto";
 import { motoAdapter } from "@/interfaces/adapters/MotoAdapter";
 import { Moto, Motos } from "@/interfaces/Moto";
-import marcaService from "@/services/tables/marca";
 import { Marca } from "@/interfaces/Marca";
 import { marcaAdapter, marcaOptionsAdapter } from "@/interfaces/adapters/MarcaAdapter";
 import { Modelo } from "@/interfaces/Modelo";
 import { modeloAdapter } from "@/interfaces/adapters/ModeloAdapter";
+import modeloService from "@/services/tables/modelo";
 
 const columns: ColumnsType<Modelo> = [
   {
@@ -24,8 +24,8 @@ const columns: ColumnsType<Modelo> = [
 const MotoPage = async () => {
   let modelos:Modelo[] = [];
   try {
-    modelos = await marcaService.get();
-    console.log(modelos)
+    modelos = await modeloService.get();
+    console.log('---------------',modelos)
   } catch (error) {
     console.log(error);
   }

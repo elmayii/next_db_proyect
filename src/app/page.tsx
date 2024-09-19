@@ -59,6 +59,8 @@ export default function Home() {
           <OptionItem name={("Resumen de contratos por marcas y modelos")} img={suitcase} link="./top_3_groups" />
           <OptionItem name={("Resumen de contratos por municipios")} img={bus} link="./top_5_drivers" />
           <OptionItem name={("Listado de ingresos del año")} img={world} link="./top_3_countries" />
+          <OptionItem name={("Situacion de Motos")} img={car} link="./motos_situacion" />
+
         </>
       </OptionSection>
     </main>

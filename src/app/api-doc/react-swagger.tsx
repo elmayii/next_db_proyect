@@ -7,7 +7,7 @@ type Props = {
   spec: Record<string, any>,
 };
 
-function ReactSwagger({ spec }: Props) {
+function ReactSwagger({ spec }: Readonly<Props>) {
   return <SwaggerUI spec={spec} />;
 }
 
