@@ -40,10 +40,10 @@ const columns: ColumnsType<User> = [
 
 const UserPage = async () => {
   const session = await getServerSession(authOptions);
-  const rol = session?.role_code;
-  if (rol && !roles.includes(rol)) {
-    return redirect("/");
-  }
+  const rol = session?.id_rol;
+  // if (rol && !roles.includes(rol)) {
+  //   return redirect("/");
+  // }
   let users: User[] = [];
   try {
     users = await userService.get();
