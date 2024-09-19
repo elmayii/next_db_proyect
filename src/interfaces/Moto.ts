@@ -26,6 +26,18 @@ export interface Motos {
   matricula: string | null;
 }
 
+export interface MotoToRent {
+  id_moto: number;
+  color: string | null;
+  km: number | null;
+  nom_marca: string | null;
+  id_marca: number;
+  id_modelo:number;
+  nom_modelo: string | null;
+  situacion?: Situacion;
+  matricula: string | null;
+}
+
 export interface EditMoto extends Omit<Moto, "marca" | "modelo" | "situacion"> {
   id_marca?: number;
   id_modelo?: number;

@@ -28,7 +28,7 @@ const ListClients: React.FC<ListClientsProps> = ({
   data,
 }) => {
     const router = useRouter();
-    const initialMun = muns.length > 0 ? muns[0] : "";
+    const initialMun = muns.length > 0 ? muns[0].id_mun.toString() : "";
     const [selectedMun, setSelectedMun] = useState(initialMun);
     const [loading, setLoading] = useState(false);
     const [dataToShow, setDataToShow] = useState(data);
@@ -39,8 +39,9 @@ const ListClients: React.FC<ListClientsProps> = ({
         const data = await clientService.getBy(
             selectedMun.toString()
         );
-        const booleanToString = data.map((item: ClientTable )=>({
-          key: item.id_cliente,
+        const booleanToString = data.map((item: Client )=>({
+          key: item.id_usuario,
+          liquidez: item.precio?.toString(),
           ...item,
         }));
         setDataToShow(booleanToString);
@@ -57,11 +58,13 @@ const ListClients: React.FC<ListClientsProps> = ({
     return (
       <>
         <div className="flex flex-col">
-          <Title>{"Filtrar por Municipios"}</Title>
+          <Title>{"Clientes por Municipios"}</Title>
           <Select
-            placeholder="Seleccione un Municipio"
+            placeholder="Filtrar por Municipios"
             style={{ width: 200, marginBottom: 16 }}
-            onChange={setSelectedMun}
+            onChange={(e) => {
+              setSelectedMun(e)
+            }}
             options={munOptionsAdapter(muns)}
             value={selectedMun}
           />

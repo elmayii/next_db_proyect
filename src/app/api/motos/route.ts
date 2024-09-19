@@ -22,16 +22,18 @@ export const COLUMN_NAME = "motos" as never;
 
 export const GET = async () => {
   try {
-    const motos : any[] = await prisma.$queryRaw`SELECT * FROM obtener_resumen_motos()`;
-    const marcas : any[] = await prisma.$queryRaw`SELECT * FROM obtener_resumen_motos()`;
-    const modelos : any[] = await prisma.$queryRaw`SELECT * FROM obtener_resumen_motos()`;
+    const motos : any[] = await prisma.$queryRaw`SELECT * FROM obtener_todas_las_motos()`;
+    const marcas : any[] = await prisma.$queryRaw`SELECT * FROM obtener_todas_las_marcas()`;
+    const modelos : any[] = await prisma.$queryRaw`SELECT * FROM obtener_todos_los_modelos()`;
+    const situa: any[] = await prisma.$queryRaw`SELECT * FROM obtener_todas_las_situaciones()`;
     const result: Moto[] = motos.map((moto) => ({
       id_moto: moto.id_moto,
       color: moto.color ,
       km: moto.km,
       marca: marcas.find((ma) => ma.id_marca === moto.id_marca),
       modelo: modelos.find((mo) => mo.id_modelo === moto.id_modelo),
-      matricula: moto.matricula
+      matricula: moto.matricula,
+      situacion:situa.find((si) => si.id_situa === moto.id_situa),
     }));
 
   return NextResponse.json(result ?? []);
@@ -92,3 +94,12 @@ export const POST = async (request: Request, response: Response) => {
 // END;
 
 // TABLE(matricula character varying, color character varying, km double precision, nom_marca character varying, nom_modelo character varying)
+
+// BEGIN
+//  RETURN QUERY SELECT m.matricula, m.color, m.km, ma.nom_marca, mod.nom_modelo, ma.id_marca, mod.id_modelo, m.id_situa, s.nom_situa
+//  FROM public."Moto" as m JOIN public."Modelo" as mod on m.id_modelo = mod.id_modelo
+//  JOIN public."Marca" as ma ON mod.id_marca = ma.id_marca;
+//  JOIN public."Situacion" as s on m.id_situa = s.is_situa
+// END;
+
+// TABLE(matricula character varying, color character varying, km double precision, nom_marca character varying, nom_modelo character varying, id_situa integer, nom_situa character varying)

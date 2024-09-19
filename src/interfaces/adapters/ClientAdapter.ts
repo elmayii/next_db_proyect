@@ -3,9 +3,9 @@ import { Client, ClientTable, CreateClient, EditClient } from "../Clients";
 
 export const clientAdapter = (clientes: Client[]): ClientTable[] => {
     return clientes.map((client) => ({
-      id_cliente: client.id_cliente.toString(),
-      nombre_cliente: client.nombre_cliente + " " + client.apellido_cliente,
-      key: client.id_cliente.toString(),
+      id_usuario: client.id_usuario.toString(),
+      nom_cliente: client.nom_cliente as string,
+      key: client.id_usuario.toString(),
       nom_mun: client.nom_mun?.toString(),
       liquidez: client.precio?.toString(),
       alquileres: client.alquileres
@@ -13,27 +13,21 @@ export const clientAdapter = (clientes: Client[]): ClientTable[] => {
   };
   
   export const clientFormAdapter = (client: EditClient): FormDataType<EditClient> => ({
-      nombre_cliente: client.nombre_cliente || "",
-      apellido_cliente: client.apellido_cliente || "",
-      id_municipio: client.id_municipio?.toString() || "",
-      id_cliente:client.id_cliente?.toString() || "",
+      nom_cliente: client.nom_cliente || "",
+      id_usuario:client.id_usuario?.toString() || "",
   });
   
   export const clientTypesAdapter = (client: FormDataType<EditClient>): EditClient => ({
-    nombre_cliente: client.nombre_cliente || "",
-    apellido_cliente: client.apellido_cliente || "",
-    id_municipio: Number(client.id_municipio),
-    id_cliente: Number(client.id_cliente),
+    nom_cliente: client.nom_cliente || "",
+    id_usuario: Number(client.id_usuario),
   });
   
   export const clientCreateAdapter = (client: EditClient): CreateClient => ({
-    nombre_cliente: client.nombre_cliente || "",
-    apellido_cliente: client.apellido_cliente || "",
-    id_municipio: Number(client.id_municipio),
+    nom_cliente: client.nom_cliente || "",
   });
   
   export const clientOptionsAdapter = (clients: Client[]): Option[] =>
     clients.map((client) => ({
-      label: (client.nombre_cliente + " " + client.apellido_cliente) as string,
-      value: client.id_cliente.toString(),
+      label: (client.nom_cliente) as string,
+      value: client.id_usuario.toString(),
   }));

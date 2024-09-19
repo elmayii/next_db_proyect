@@ -10,7 +10,7 @@ export interface User {
 }
 
 export interface EditUser extends Omit<User, "role"> {
-  role_code?: number;
+  id_rol?: number;
 }
 
 export interface CreateUser extends Omit<EditUser, "user_code"> {}

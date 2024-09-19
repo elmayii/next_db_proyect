@@ -14,13 +14,13 @@ import React from "react";
 const columns: ColumnsType<ClientTable> = [
   {
     title: "Identificador",
-    dataIndex: "id_cliente",
-    key: "id_cliente",
+    dataIndex: "id_usuario",
+    key: "id_usuario",
   },
   {
     title: "Nombre Cliente",
-    dataIndex: "nombre_cliente",
-    key: "nombre_cliente",
+    dataIndex: "nom_cliente",
+    key: "nom_cliente",
   },
   {
     title: "Municipio",
@@ -39,21 +39,21 @@ const columns: ColumnsType<ClientTable> = [
   },
 ];
 
-//TABLE(nom_cliente character varying, apellido_cliente character varying, nom_mun character varying, id_cliente integer, precio double precision, alquileres integer)
+//TABLE(nom_cliente character varying, apellido_cliente character varying, nom_mun character varying, id_usuario integer, precio double precision, alquileres integer)
 /*
 
 BEGIN
 	RETURN QUERY SELECT
-	U.nombre_cliente,
+	U.nom_cliente,
 	U.apellido_cliente,
 	M.nom_mun,
-	U.id_cliente,
+	U.id_usuario,
 	SUM(c.precio),
 	COUNT(*)::integer as alquileres
 	FROM PUBLIC."Cliente" AS U JOIN PUBLIC."Municipio" AS M ON U.id_municipio = M.id_mun
-	JOIN public."Contrato" as c ON u.id_cliente = c.id_cliente
+	JOIN public."Contrato" as c ON u.id_usuario = c.id_usuario
 	WHERE M.id_mun = municipio
-	GROUP BY U.nombre_cliente,U.apellido_cliente,M.nom_mun,U.id_cliente;
+	GROUP BY U.nom_cliente,U.apellido_cliente,M.nom_mun,U.id_usuario;
 END;
 */
 
@@ -77,5 +77,6 @@ const ClientsPage = async () => {
     </main>
   );
 };
+
 
 export default ClientsPage;

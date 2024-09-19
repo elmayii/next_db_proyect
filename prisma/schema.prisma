@@ -76,7 +76,7 @@ model Situacion {
 
 model Usuario {
   id_usuario  Int        @id(map: "Cliente_pkey") @default(autoincrement())
-  nom_usuario String     @db.VarChar
+  nom_cliente String     @db.VarChar
   edad        Int
   sexo        String     @db.VarChar
   num_tel     String     @db.VarChar

@@ -8,8 +8,8 @@ export interface Contract {
   seguro: boolean | null;
   id_formaPago: number | null;
   nom_formaPago:string | null;
-  id_cliente: number | null;
-  nombre_cliente:string | null;
+  id_usuario: number | null;
+  nom_usuario:string | null;
   apellido_cliente: string | null;
   id_moto: number | null;
   matricula: string | null;
@@ -19,10 +19,7 @@ export interface Contract {
 }
 
 export interface EditContract
-  extends Omit<Contract, "nombre_cliente" | "apellido_cliente" | "nom_formaPago" | "matricula" | "marca" | "modelo"> {
-  contract_country?: string;
-  car_code?: number;
-  start_date?: string | null;
-  end_date?: string | null;
+  extends Omit<Contract, "nom_cliente" | "apellido_cliente" | "nom_formaPago" | "matricula" | "marca" | "modelo"> {
+
 }
 export interface CreateContract extends Omit<EditContract, "id_contrato"> {}

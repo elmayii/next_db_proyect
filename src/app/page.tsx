@@ -34,42 +34,33 @@ export default function Home() {
   
   return (
     <main className="flex flex-col items-center gap-6 ml-3  p-5">
-      <OptionSection name={("Administración")}>
+      {data?.id_rol==2 && <OptionSection name={("Administración")}>
         <>
           <OptionItem name={("Contratos")} img={contract} link="./contratos" />
-          <OptionItem name={("Clientes")} img={id} link="./clientes" />
           <OptionItem name={("Motos")} img={moto} link="./motos" />
           <OptionItem name={("Municipios")} img={brand} link="./municipios" />
           <OptionItem name={("Marcas")} img={brand} link="./marcas" />
           <OptionItem name={("Situacion")} img={car} link="./situacion" />
           <OptionItem name={("Modelos")} img={car} link="./modelos" />
+          <OptionItem name={("Users")} img={users} link="./users" />
         </>
-      </OptionSection>
+      </OptionSection>}
       <OptionSection name={("Servicios")}>
         <>
-          
-          <OptionItem name={("Motos(en tiempo real)")} img={moto} link="./motos(real)" />
+          <OptionItem name={("Rentar Motos")} img={contract} link="./motos_rent" />
           <OptionItem name={("Mis Contratos")} img={contract} link="./contracts" />
         </>
       </OptionSection>
       <OptionSection name={("Reportes")}>
         <>
+          <OptionItem name={("Motos(en tiempo real)")} img={moto} link="./motos(real)" />
+          <OptionItem name={("Resumen Clientes")} img={id} link="./clientes_por_municipio" />
           <OptionItem name={("Clientes (incumplidores de contrato)")} img={id} link="./drivers" />
           <OptionItem name={("Resumen de contratos por marcas y modelos")} img={suitcase} link="./top_3_groups" />
           <OptionItem name={("Resumen de contratos por municipios")} img={bus} link="./top_5_drivers" />
           <OptionItem name={("Listado de ingresos del año")} img={world} link="./top_3_countries" />
         </>
       </OptionSection>
-      {data?.role_code==1 && <OptionSection name={("Otros")}>
-        <>
-          <OptionItem name={("District")} img={district} link="./districts" />
-          <OptionItem name={("Fuel")} img={fuel} link="./fuels" />
-          <OptionItem name={("Country")} img={geography} link="./countries" />
-          <OptionItem name={("Month")} img={bxs} link="./months" />
-          <OptionItem name={("Tour group")} img={tourist} link="./tourist_groups" />
-          <OptionItem name={("Users")} img={users} link="./users" />
-        </>
-      </OptionSection>}
     </main>
   );
 }

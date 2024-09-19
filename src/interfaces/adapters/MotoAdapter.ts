@@ -12,7 +12,8 @@ export const motoAdapter = (motos: Moto[]): TableDataType<Moto>[] => {
     nom_modelo: moto.modelo?.nom_modelo || "",
     id_modelo: moto.modelo?.id_modelo.toString() || "",
     key: moto.id_moto || "",
-    matricula:moto.matricula || ""
+    matricula:moto.matricula || "",
+    situacion: moto.situacion?.id_situa?.toString() || ""
   }));
 };
 
