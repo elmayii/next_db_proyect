@@ -1,4 +1,4 @@
-import { Contract } from "@/interfaces/Contract";
+import { Contract, CreateContract } from "@/interfaces/Contract";
 import prisma from "@/lib/prisma";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
@@ -20,22 +20,12 @@ import { NextResponse } from "next/server";
  */
 
 export const GET = async () => {
-  const contracts = await prisma.contract.findMany();
-  const cars = await prisma.car.findMany();
-  const countries = await prisma.country.findMany();
-  const result: Contract[] = contracts.map((contract) => ({
-    contract_code: contract.contract_code,
-    applicant_name: contract.applicant_name,
-    start_date: contract.start_date,
-    end_date: contract.end_date,
-    contract_kms: contract.contract_kms,
-    contract_amount: contract.contract_amount,
-    country: countries.find(
-      (country) => country.country_code === contract.contract_country
-    ),
-    car: cars.find((car) => car.car_code === contract.car_code),
-  }));
+  try {
+    const result : any[] = await prisma.$queryRaw`SELECT * FROM obtener_resumen_contratos()`;
   return NextResponse.json(result ?? []);
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 /**
@@ -72,18 +62,17 @@ export const GET = async () => {
 
 
 export const POST = async (request: Request, response: Response) => {
-  const data = await request.json();
+  
+  const data: CreateContract = await request.json();
+  const { fecha_ini } = data
   try {
-    await prisma.contract.create({ data });
+    await prisma.$executeRaw`SELECT crear_modelo(${nom_modelo})`
     return NextResponse.json({ ok: true });
   } catch (error: any) {
-    if (
-      (error as PrismaClientUnknownRequestError).name ===
-      "PrismaClientUnknownRequestError"
-    ) {
-      const bdError = handlePrismaClientUnknownRequestError(error);
-      return NextResponse.json(bdError, { status: 400 });
+    console.log(error)
+    if(error.code === "P2002"){
+      return NextResponse.json("Nombre de marca ya usado", { status: 400 });
     }
-    return NextResponse.json(error, { status: 400 });
+    return NextResponse.json("Error creando marca", { status: 400 }); 
   }
 };

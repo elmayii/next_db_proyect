@@ -1,6 +1,6 @@
 export interface Role {
-  role_code: number;
-  description: string;
+  id_role: number;
+  nom_rol: string;
 }
 
-export interface CreateRole extends Omit<Role, "role_code"> {}
+export interface CreateRole extends Omit<Role, "id_role"> {}

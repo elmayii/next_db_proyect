@@ -16,7 +16,7 @@ const authOptions: NextAuthOptions = {
         try {
           const user = await prisma.usuario.findFirst({
             where: {
-              username: credentials?.username,
+              nom_usuario: credentials?.username,
               password: credentials?.password,
             },
           });
@@ -41,14 +41,14 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: ({ token, user }) => {
       const userSession = user as unknown as EditUser;
-      if (userSession && userSession.role_code)
-        token.role_code = userSession.role_code;
+      if (userSession && userSession.id_rol)
+        token.id_rol = userSession.id_rol;
       return token;
     },
     session: ({ session, token }) => {
       const user = session.user as EditUser;
-      if (user && token && token.role_code)
-        user.role_code = token.role_code as number;
+      if (user && token && token.id_rol)
+        user.id_rol = token.id_rol as number;
       return user as unknown as Session;
     },
   },

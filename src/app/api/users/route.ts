@@ -1,7 +1,5 @@
-import { User } from "@/interfaces/User";
-import { enviarCorreoElectronico } from "@/lib/email";
+import { CreateUser, User } from "@/interfaces/User";
 import prisma from "@/lib/prisma";
-import { isValidEmail } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 /**
@@ -20,15 +18,20 @@ import { NextResponse } from "next/server";
  */
 
 export const GET = async () => {
-  const users = await prisma.users.findMany();
-  const roles = await prisma.role.findMany();
-  const result: User[] = users.map((user) => ({
-    user_code: user.user_code,
-    username: user.username,
+  const users:any[] = await prisma.$queryRaw`SELECT * FROM obtener_usuarios()`;
+  const roles :any[] = await prisma.$queryRaw`SELECT * FROM obtener_roles()`;
+  const municipios:any[] = await prisma.$queryRaw`SELECT * FROM obtener_todos_los_municipios()`;
+  const result: User[] = users .map((user) => ({
+    id_usuario: user.id_usuario,
+    nom_usuario: user.nom_usuario,
+    edad: user.edad,
+    sexo: user.sexo,
+    num_tel: user.num_tel,
+    id_mun: user.id_mun,
+    nom_mun: (municipios ).find((m) => m.id_mun === user.id_mun)?.nom_mun,
+    id_rol: user.id_rol,
+    rol: (roles).find((r) => r.role_code === user.id_rol)?.role_name,
     password: user.password,
-    name: user.name,
-    email: user.email,
-    role: roles.find((role) => role.role_code === user.role_code),
   }));
   return NextResponse.json(result ?? []);
 };
@@ -62,17 +65,24 @@ export const GET = async () => {
  */
 
 export const POST = async (request: Request, response: Response) => {
-  const data = await request.json();
+  const data:CreateUser = await request.json();
+  const {
+    nom_usuario,
+    edad,
+    sexo,
+    num_tel,
+    id_mun,
+    id_rol,
+    password,
+  } = data;
   try {
-    if(!isValidEmail(data.email)){
-      return NextResponse.json("Invalid email", { status: 400 });      
-    }
-    await prisma.users.create({ data });
-    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@ a TRANSBUS, ${data.name}!.
-Nombre de usuario: ${data.username}.
+    
+    await prisma.$queryRaw`SELECT crear_usuario(${nom_usuario},${edad},${sexo},${num_tel},${id_mun},${id_rol},${password})`;
+    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@, ${data.nom_usuario}!.
+Nombre de usuario: ${data.nom_usuario}.
 Contraseña: ${data.password}.
-TRANSBUS: http://localhost:3000`;
-    enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
+E-Moto: http://localhost:3000`;
+    // enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (error.code === "P2002") {

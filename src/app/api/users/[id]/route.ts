@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
+import { EditUser, User } from "@/interfaces/User";
 
 /**
  * @swagger
@@ -30,7 +31,7 @@ export const GET = async (
 ) => {
   const { id } = params;
   const user_code = parseInt(id);
-  const user = await prisma.users.findFirst({ where: { user_code } });
+  const user = await prisma.$executeRaw`SELECT obtener_usuario(${user_code})`;
   if (user) {
     return NextResponse.json(user);
   }
@@ -76,10 +77,10 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   try{
-    const data = await request.json();
+    const data:EditUser = await request.json();
     const { id } = params;
     const user_code = parseInt(id);
-    await prisma.users.update({ where: { user_code }, data });
+    await prisma.$executeRaw`SELECT actualizar_usuario(${user_code}, ${data.nom_usuario}, ${data.edad}, ${data.sexo}, ${data.num_tel}, ${data.id_mun}, ${data.id_rol})`;
     return NextResponse.json({ ok: true });
   }catch(error: any){
     return NextResponse.json("Error modificando usuario", { status: 400 });
@@ -114,8 +115,8 @@ export const DELETE = async (
 ) => {
   try{
     const { id } = params;
-    const user_code = parseInt(id);
-    await prisma.users.delete({ where: { user_code } });
+    const id_usuario = parseInt(id);
+    await prisma.$executeRaw`SELECT eliminar_usuario(${id_usuario})`;
     return NextResponse.json({ ok: true });
   }catch(error: any){
     if (

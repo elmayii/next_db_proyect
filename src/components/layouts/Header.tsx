@@ -42,7 +42,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
             {pathname === "/" && (
               <>
                 <nav className="sm:flex items-center gap-2 hidden">

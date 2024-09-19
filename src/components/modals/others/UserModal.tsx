@@ -27,12 +27,14 @@ const UserModal: React.FC = () => {
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditUser>>({
-    user_code: "",
-    username: "",
+    id_usuario: "",
+    nom_usuario: "",
     password: "",
-    name: "",
-    email: "",
-    role_code: "",
+    num_tel: "",
+    edad: "",
+    id_rol: "",
+    id_mun: "",
+    sexo: "",
   });
 
   const [roles, setFuels] = useState<Role[]>([]);
@@ -41,7 +43,7 @@ const UserModal: React.FC = () => {
       await form.current?.validateFields();
       const adaptedTypesData = userTypesAdapter(data);
       if (editing) {
-        await userService.update(data.user_code.toString(), adaptedTypesData);
+        await userService.update(data.id_usuario.toString(), adaptedTypesData);
       } else {
         await userService.add(userCreateAdapter(adaptedTypesData));
       }
@@ -88,7 +90,7 @@ const UserModal: React.FC = () => {
                 label="Username"
                 id="username"
                 maxLength={50}
-                currentValue={data.username}
+                currentValue={data.nom_usuario}
                 onChange={(e) =>
                   setData((data) => {
                     return { ...data, username: e.target.value };
@@ -120,7 +122,7 @@ const UserModal: React.FC = () => {
                 label="Name"
                 id="name"
                 maxLength={50}
-                currentValue={data.name}
+                currentValue={data.nom_usuario}
                 onChange={(e) =>
                   setData((data) => {
                     return { ...data, name: e.target.value };
@@ -129,19 +131,19 @@ const UserModal: React.FC = () => {
               />
             </Form.Item>
             <Form.Item
-              name="role_code"
+              name="id_rol"
               rules={[{ required: true, message: "Role required" }]}
             >
               <InputSelect
                 id="role_code"
                 label="Role"
                 options={roleOptionsAdapter(roles)}
-                currentValue={data.role_code}
+                currentValue={data.id_rol}
                 onChange={(e) =>
                   setData((data) => {
                     return {
                       ...data,
-                      role_code: e.target.value,
+                      id_rol: e.target.value,
                     };
                   })
                 }
@@ -152,13 +154,13 @@ const UserModal: React.FC = () => {
               rules={[{ required: true, message: "Email required" }]}
             >
               <InputText
-                label="Email"
-                id="email"
+                label="Municipio"
+                id="municipio"
                 maxLength={50}
-                currentValue={data.email}
+                currentValue={data.id_mun}
                 onChange={(e) =>
                   setData((data) => {
-                    return { ...data, email: e.target.value };
+                    return { ...data, id_mun: e.target.value };
                   })
                 }
               />

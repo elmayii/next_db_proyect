@@ -58,7 +58,8 @@ const TableData: React.FC<TableDataProps> = ({
         router.refresh();
         api.success({ message: t("Element Successfully Deleted",{ns:"translation"}) });
       } catch (error: any) {
-        api.error({ message: error.detail.message });
+        console.log(error)
+        api.error({ message: error.detail?.message });
       } finally {
         removeFromDeleting(value.key);
       }
@@ -112,7 +113,7 @@ const TableData: React.FC<TableDataProps> = ({
         return (
           <div className="flex items-center justify-end gap-2">
             {!deleting.includes(value.key) &&
-             authorizeModifyData(data?.role_code,title) && (
+             authorizeModifyData(data?.id_rol,title) && (
               <DeleteOutlined
                 style={{color:'red'}}
                 className="cursor-pointer"
@@ -123,7 +124,7 @@ const TableData: React.FC<TableDataProps> = ({
             {deleting.includes(value.key) && (
               <LoadingOutlined style={{ fontSize: 16 }} spin />
             )}
-            {authorizeModifyData(data?.role_code,title) &&
+            {authorizeModifyData(data?.id_rol,title) &&
               <EditOutlined
               className="cursor-pointer"
               onClick={() => handleEdit(Data[dataToShow.indexOf(value)])}
@@ -163,7 +164,7 @@ const TableData: React.FC<TableDataProps> = ({
           <Button
             onClick={() => dispatch(setCurrentModal(modal))}
             type="primary"
-            disabled={!authorizeModifyData(data?.role_code,title)}
+            disabled={!authorizeModifyData(data?.id_rol,title)}
           >
             {t("Insert",{ns:"translation"})}
           </Button>

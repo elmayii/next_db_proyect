@@ -49,7 +49,7 @@ model Moto {
   km        Float
   id_marca  Int
   id_modelo Int
-  id_situa  Int
+  id_situa  Int        @default(3)
   matricula String     @db.VarChar
   Contrato  Contrato[]
   Marca     Marca      @relation(fields: [id_marca], references: [id_marca], onDelete: NoAction, onUpdate: NoAction, map: "id_marca_fk")
@@ -75,14 +75,14 @@ model Situacion {
 }
 
 model Usuario {
-  id_usuario Int        @id(map: "Cliente_pkey") @default(autoincrement())
-  username   String     @db.VarChar
-  edad       Int
-  sexo       String     @db.VarChar
-  num_tel    String     @db.VarChar
-  id_mun     Int
-  id_rol     Int
-  password   String     @db.VarChar
-  Contrato   Contrato[]
-  Municipio  Municipio  @relation(fields: [id_mun], references: [id_mun], onDelete: NoAction, onUpdate: NoAction, map: "id_mun_fk")
+  id_usuario  Int        @id(map: "Cliente_pkey") @default(autoincrement())
+  nom_cliente String     @db.VarChar
+  edad        Int
+  sexo        String     @db.VarChar
+  num_tel     String     @db.VarChar
+  id_mun      Int
+  id_rol      Int
+  password    String     @db.VarChar
+  Contrato    Contrato[]
+  Municipio   Municipio  @relation(fields: [id_mun], references: [id_mun], onDelete: NoAction, onUpdate: NoAction, map: "id_mun_fk")
 }
